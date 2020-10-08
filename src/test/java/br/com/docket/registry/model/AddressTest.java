@@ -8,22 +8,22 @@ import static org.junit.jupiter.api.Assertions.*;
 class AddressTest {
 
     @Test
-    public void whenStreetAddressIsBlankShouldThrowIllegalArgumentException(){
+    public void whenStreetAddressIsBlankShouldThrowIllegalArgumentException() {
         assertThatIllegalArgumentException().isThrownBy(()-> new Address("","237649", "São Paulo", "SP"));
     }
 
     @Test
-    public void whenPostalCodeIsBlankShouldThrowIllegalArgumentException(){
+    public void whenPostalCodeIsBlankShouldThrowIllegalArgumentException() {
         assertThatIllegalArgumentException().isThrownBy(()-> new Address("Av Paulista 1000","", "São Paulo", "SP"));
     }
 
     @Test
-    public void whenCityIsBlankShouldThrowIllegalArgumentException(){
+    public void whenCityIsBlankShouldThrowIllegalArgumentException() {
         assertThatIllegalArgumentException().isThrownBy(()-> new Address("Av Paulista 1000","237649", "", "SP"));
     }
 
     @Test
-    public void whenStateIsBlankShouldThrowIllegalArgumentException(){
+    public void whenStateIsBlankShouldThrowIllegalArgumentException() {
         assertThatIllegalArgumentException().isThrownBy(()-> new Address("Av Paulista 1000","237649", "São Paulo", ""));
     }
 

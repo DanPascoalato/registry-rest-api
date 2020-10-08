@@ -12,12 +12,12 @@ class RegistryTest {
     private List<Certificate> certs = List.of(new Certificate(1, "Certi de Nascimento"));
 
     @Test
-    public void whenNameIsBlankShouldThrowIllegalArgumentException(){
+    public void whenNameIsBlankShouldThrowIllegalArgumentException() {
         assertThatIllegalArgumentException().isThrownBy(()-> new Registry("", address, certs));
     }
 
     @Test
-    public void whenAddressIsNullShouldThrowIllegalArgumentException(){
+    public void whenAddressIsNullShouldThrowIllegalArgumentException() {
         assertThatIllegalArgumentException().isThrownBy(()-> new Registry("Cartorio de notas", null, certs));
     }
 
