@@ -23,9 +23,11 @@ public class RegistryOffice {
     @JsonProperty("name")
     private String name;
 
+    @OneToOne
     @JsonProperty("address")
     private Address address;
 
+    @OneToMany
     @JsonProperty("certificates")
     private List<Certificate> certificates;
 
