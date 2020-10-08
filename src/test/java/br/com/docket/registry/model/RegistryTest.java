@@ -13,12 +13,12 @@ class RegistryTest {
 
     @Test
     public void whenNameIsBlankShouldThrowIllegalArgumentException() {
-        assertThatIllegalArgumentException().isThrownBy(()-> new Registry("", address, certs));
+        assertThatIllegalArgumentException().isThrownBy(()-> new RegistryOffice("", address, certs));
     }
 
     @Test
     public void whenAddressIsNullShouldThrowIllegalArgumentException() {
-        assertThatIllegalArgumentException().isThrownBy(()-> new Registry("Cartorio de notas", null, certs));
+        assertThatIllegalArgumentException().isThrownBy(()-> new RegistryOffice("Cartorio de notas", null, certs));
     }
 
     //TODO implement test if it works

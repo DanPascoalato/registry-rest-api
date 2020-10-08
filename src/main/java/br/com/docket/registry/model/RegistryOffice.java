@@ -6,19 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class Registry {
+public class RegistryOffice {
 
     private String name;
     private Address address;
     private List<Certificate> certificates;
 
-    public Registry(String name, Address address, List<Certificate> certificates){
+    public RegistryOffice(String name, Address address, List<Certificate> certificates){
         setName(name);
         setAddress(address);
         this.certificates = new ArrayList<>();
     }
 
-    public Registry(String name, Address address){
+    public RegistryOffice(String name, Address address){
         this(name, address, new ArrayList<>());
     }
 
