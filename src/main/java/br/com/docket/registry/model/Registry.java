@@ -2,18 +2,30 @@ package br.com.docket.registry.model;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 public class Registry {
 
     private String name;
     private Address address;
-    private Certificate certificate;
+    private List<Certificate> certificates;
 
-    public Registry(String name, Address address, Certificate certificate){
+    public Registry(String name, Address address, List<Certificate> certificates){
         setName(name);
         setAddress(address);
-        setCertificate(certificate);
+        this.certificates = new ArrayList<>();
     }
+
+    public Registry(String name, Address address){
+        this(name, address, new ArrayList<>());
+    }
+
+    public void addCertificate(Certificate certificate){
+        this.certificates.add(certificate);
+    }
+
 
     private void setName(String name) {
         if(name.isBlank()){
@@ -27,12 +39,5 @@ public class Registry {
             throw new IllegalArgumentException();
         }
         this.address = address;
-    }
-
-    private void setCertificate(Certificate certificate) {
-        if(certificate == null){
-            throw new IllegalArgumentException();
-        }
-        this.certificate = certificate;
     }
 }
