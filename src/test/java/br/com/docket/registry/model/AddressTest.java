@@ -26,4 +26,7 @@ class AddressTest {
     public void whenStateIsBlankShouldThrowIllegalArgumentException(){
         assertThatIllegalArgumentException().isThrownBy(()-> new Address("Av Paulista 1000","237649", "São Paulo", ""));
     }
+
+    //TODO implement test if it works
+
 }
