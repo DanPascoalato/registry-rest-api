@@ -1,16 +1,16 @@
 package br.com.docket.registry.controller;
 
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import br.com.docket.registry.model.RegistryOffice;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/v1/registry")
 public class RegistryOfficeController {
 
-    @PostMapping
-    public void addRegistry(){
-
+    @PostMapping("/add")
+    public RegistryOffice save(@RequestBody RegistryOffice registryOffice) {
+        return registryOffice;
     }
 
 
