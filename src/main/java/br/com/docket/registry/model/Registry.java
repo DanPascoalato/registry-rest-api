@@ -5,23 +5,34 @@ import lombok.Getter;
 @Getter
 public class Registry {
 
-    public Registry(){
-
-    }
-
     private String name;
     private Address address;
     private Certificate certificate;
 
-    public void setName(String name) {
-        this.name = name;
+    public Registry(String name, Address address, Certificate certificate){
+        setName(name);
+        setAddress(address);
+        setCertificate(certificate);
     }
 
-    public void setAddress(Address address) {
+    private void setName(String name) {
+        if(name.isBlank()){
+            throw new IllegalArgumentException();
+        }
+        this.name = name.trim();
+    }
+
+    private void setAddress(Address address) {
+        if(address == null){
+            throw new IllegalArgumentException();
+        }
         this.address = address;
     }
 
-    public void setCertificate(Certificate certificate) {
+    private void setCertificate(Certificate certificate) {
+        if(certificate == null){
+            throw new IllegalArgumentException();
+        }
         this.certificate = certificate;
     }
 }
