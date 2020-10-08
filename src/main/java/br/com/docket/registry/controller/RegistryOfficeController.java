@@ -29,7 +29,7 @@ public class RegistryOfficeController {
     public RegistryOffice put(@RequestBody RegistryOffice registryOffice, @PathVariable("id") Integer id) {
         Address address = new Address("Av Paulista 1000", "234524", "São Paulo", "SP");
         List<Certificate> certs = List.of(new Certificate(1, "Certi de Nascimento"));
-        return new RegistryOffice("Casa da João", address, certs);
+        return new RegistryOffice("Casa do João", address, certs);
     }
 
     @DeleteMapping("/{id}")
