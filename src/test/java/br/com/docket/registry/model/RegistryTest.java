@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 class RegistryTest {
 
     private Address address = new Address("Av Paulista 1000", "234524", "São Paulo", "SP");
-    private List<Certificate> certs = List.of(new Certificate(1, "Certi de Nascimento"));
+    private List<Certificate> certs = List.of(new Certificate(1L, "Certi de Nascimento"));
 
     @Test
     public void whenNameIsBlankShouldThrowIllegalArgumentException() {

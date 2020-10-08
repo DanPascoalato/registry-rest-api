@@ -16,7 +16,7 @@ public class Address {
     @JsonProperty("street")
     private String streetAddress;
 
-    @Column(name = "postal_code")
+    @Column(name = "postalCode")
     @JsonProperty("postalCode")
     private String postalCode;
 

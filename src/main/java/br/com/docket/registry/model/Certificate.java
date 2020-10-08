@@ -4,11 +4,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
+import javax.persistence.*;
+
 @Getter
+@Entity
+@Table(name = "certificate")
 public class Certificate {
 
-    @JsonIgnore
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty
+    private Long id;
+
+    @Column(name = "name")
     @JsonProperty("name")
     private String name;
 
@@ -16,12 +24,12 @@ public class Certificate {
 
     }
 
-    public Certificate(Integer id, String name) {
+    public Certificate(Long id, String name) {
         setId(id);
         setName(name);
     }
 
-    private void setId(Integer id) {
+    private void setId(Long id) {
         if(id <= 0){
             throw new IllegalArgumentException();
         }

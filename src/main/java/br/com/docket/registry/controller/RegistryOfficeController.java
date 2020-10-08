@@ -19,21 +19,21 @@ public class RegistryOfficeController {
     }
 
     @GetMapping("/{id}")
-    public RegistryOffice get(@PathVariable("id") Integer id) {
+    public RegistryOffice get(@PathVariable("id") Long id) {
         Address address = new Address("Av Paulista 1000", "234524", "São Paulo", "SP");
-        List<Certificate> certs = List.of(new Certificate(1, "Certi de Nascimento"));
+        List<Certificate> certs = List.of(new Certificate( 1L, "Certi de Nascimento"));
         return new RegistryOffice("Casa da mãe Joana", address, certs);
     }
 
     @PutMapping("/{id}")
-    public RegistryOffice put(@RequestBody RegistryOffice registryOffice, @PathVariable("id") Integer id) {
+    public RegistryOffice put(@RequestBody RegistryOffice registryOffice, @PathVariable("id") Long id) {
         Address address = new Address("Av Paulista 1000", "234524", "São Paulo", "SP");
-        List<Certificate> certs = List.of(new Certificate(1, "Certi de Nascimento"));
+        List<Certificate> certs = List.of(new Certificate( 1L, "Certi de Nascimento"));
         return new RegistryOffice("Casa do João", address, certs);
     }
 
     @DeleteMapping("/{id}")
-    public void del(@PathVariable("id") Integer id) {
+    public void del(@PathVariable("id") Long id) {
     }
 
     @GetMapping
