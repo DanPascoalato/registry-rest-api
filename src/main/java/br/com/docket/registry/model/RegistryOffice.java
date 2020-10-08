@@ -14,7 +14,7 @@ public class RegistryOffice {
     private String name;
     @JsonProperty("address")
     private Address address;
-    @JsonIgnore
+    @JsonProperty("certificates")
     private List<Certificate> certificates;
 
     private RegistryOffice() {
