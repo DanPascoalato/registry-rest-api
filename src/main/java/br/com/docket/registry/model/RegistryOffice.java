@@ -2,18 +2,30 @@ package br.com.docket.registry.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Generated;
 import lombok.Getter;
+import org.springframework.data.util.Lazy;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Entity
 public class RegistryOffice {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty
+    private Long id;
+
+    @Column(name = "name")
     @JsonProperty("name")
     private String name;
+
     @JsonProperty("address")
     private Address address;
+
     @JsonProperty("certificates")
     private List<Certificate> certificates;
 
