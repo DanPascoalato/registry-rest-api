@@ -1,5 +1,7 @@
 package br.com.docket.registry.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -8,11 +10,18 @@ import java.util.List;
 @Getter
 public class RegistryOffice {
 
+    @JsonProperty("name")
     private String name;
+    @JsonProperty("address")
     private Address address;
+    @JsonIgnore
     private List<Certificate> certificates;
 
-    public RegistryOffice(String name, Address address, List<Certificate> certificates){
+    private RegistryOffice() {
+
+    }
+
+    public RegistryOffice(String name, Address address, List<Certificate> certificates) {
         setName(name);
         setAddress(address);
         this.certificates = new ArrayList<>();
