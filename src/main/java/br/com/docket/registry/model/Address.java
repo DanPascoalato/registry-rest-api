@@ -3,15 +3,28 @@ package br.com.docket.registry.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 @Getter
+@Entity
+@Table(name = "address")
 public class Address {
 
+    @Column(name = "streetAddress")
     @JsonProperty("street")
     private String streetAddress;
+
+    @Column(name = "postal_code")
     @JsonProperty("postalCode")
     private String postalCode;
+
+    @Column(name = "city")
     @JsonProperty("city")
     private String city;
+
+    @Column(name = "state")
     @JsonProperty("state")
     private String state;
 
