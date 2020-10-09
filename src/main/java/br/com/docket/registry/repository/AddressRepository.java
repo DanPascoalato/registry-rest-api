@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 @Transactional(value = Transactional.TxType.MANDATORY)
-public interface AddressRepository extends CrudRepository<Address, Integer> {
+public interface AddressRepository extends CrudRepository<Address, Long> {
 
 }
