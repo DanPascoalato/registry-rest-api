@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Certificate {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "cert_gen_seq")
     @JsonProperty
     private Long id;
 

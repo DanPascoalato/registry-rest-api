@@ -7,6 +7,7 @@ import lombok.Getter;
 import org.springframework.data.util.Lazy;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
 public class RegistryOffice {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "regis_gen_seq")
     @JsonProperty
     private Long id;
 

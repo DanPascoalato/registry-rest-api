@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Address {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "address_gen_seq")
     @JsonProperty
     private Long id;
 
