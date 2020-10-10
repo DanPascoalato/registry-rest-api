@@ -55,8 +55,12 @@ public class RegistryOfficeController {
     }
 
     @DeleteMapping("/{id}")
-    public void del(@PathVariable("id") Long id) {
-        officeRepo.deleteById(id);
+    public ResponseEntity<?> del(@PathVariable("id") Long id) {
+        return officeRepo.findById(id)
+                .map(registryOffice -> {
+                    officeRepo.deleteById(id);
+                    return ResponseEntity.ok().build();
+                }).orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping
