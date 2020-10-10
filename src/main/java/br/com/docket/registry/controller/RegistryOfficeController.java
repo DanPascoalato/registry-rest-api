@@ -48,10 +48,17 @@ public class RegistryOfficeController {
     }
 
     @PutMapping("/{id}")
-    public RegistryOffice put(@RequestBody RegistryOffice registryOffice, @PathVariable("id") Long id) {
-        Address address = new Address("Av Paulista 1000", "234524", "São Paulo", "SP");
-        List<Certificate> certs = List.of(new Certificate( 1L, "Certi de Nascimento"));
-        return new RegistryOffice("Casa do João", address, certs);
+    public RegistryOffice put(@RequestBody RegistryOffice newRegistryOffice, @PathVariable("id") Long id) {
+        Optional<RegistryOffice> optionalOffice = officeRepo.findById(id);
+        if(optionalOffice.isPresent()) {
+            RegistryOffice office = optionalOffice.orElse(null);
+            Address savedAddress = addressRepo.save(newRegistryOffice.getAddress());
+            newRegistryOffice.getCertificates().forEach(cert -> certRepo.save(cert));
+            office.updateWith(newRegistryOffice);
+            return officeRepo.save(office);
+        } else {
+            return null;
+        }
     }
 
     @DeleteMapping("/{id}")

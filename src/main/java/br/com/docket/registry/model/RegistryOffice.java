@@ -1,9 +1,11 @@
 package br.com.docket.registry.model;
 
+import br.com.docket.registry.repository.CertificateRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Generated;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Lazy;
 
 import javax.persistence.*;
@@ -42,14 +44,17 @@ public class RegistryOffice {
         this.certificates = new ArrayList<>();
     }
 
-    public RegistryOffice(String name, Address address){
-        this(name, address, new ArrayList<>());
+    public void updateWith(RegistryOffice registryOffice) {
+        setName(registryOffice.name);
+        Address newAddress = registryOffice.address;
+        setAddress(newAddress);
+        this.certificates = registryOffice.getCertificates();
     }
 
-    public void addCertificate(Certificate certificate){
-        this.certificates.add(certificate);
-    }
 
+//    public void addCertificate(Certificate certificate) {
+//        this.certificates.add(certificate);
+//    }
 
     private void setName(String name) {
         if(name.isBlank()){
