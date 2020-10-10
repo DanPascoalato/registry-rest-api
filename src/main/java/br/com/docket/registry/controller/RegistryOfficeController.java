@@ -8,6 +8,8 @@ import br.com.docket.registry.repository.AddressRepository;
 import br.com.docket.registry.repository.CertificateRepository;
 import br.com.docket.registry.repository.RegistryOfficeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -54,6 +56,7 @@ public class RegistryOfficeController {
 
     @DeleteMapping("/{id}")
     public void del(@PathVariable("id") Long id) {
+        officeRepo.deleteById(id);
     }
 
     @GetMapping

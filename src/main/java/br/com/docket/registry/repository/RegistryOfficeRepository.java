@@ -15,8 +15,6 @@ public interface RegistryOfficeRepository extends CrudRepository<RegistryOffice,
 
     List<RegistryOffice> findByAddress(Address address);
 
-    List<RegistryOffice> findByCertificate(Certificate certificate);
-
     RegistryOffice findById (long id);
 
 }
