@@ -1,33 +1,54 @@
 # registry-rest-api
 
-Postman: https://www.getpostman.com/collections/c96cb51b48521343dfed
+[![GitHub issues](https://img.shields.io/github/issues/DanPascoalato/registry-rest-api)](https://github.com/DanPascoalato/registry-rest-api/issues)
 
+Registry Rest API é um projeto desenvolvido para atender o desafio do processo seletivo da Docket, utilizando Java 11 e 
+Spring para a criação de um sistema de cartórios
 
+##Pré-requisitos
+- JDK 11 
+- Spring Framework (Spring Boot, Spring MVC, Spring Data JPA)
+- Gradle
 
-##TODO
-- Verificar métodos do Controller
-- Verificar como não gerar dados duplicados
-- Pesquisar sobre ResponseEntity para resolver a questão de Httpstatus
+##Sobre o projeto
 
-### Get
-- Quando encontrar retornar 200 com a entidade
-- Quando não encontrar simplesmente retornar 404
+###Packages
+- Controller: Controllers e endpoints da Spring
+- Model: Classes de modelo 
+- Service: Camada de serviço para pegar a lista de certidões da REST API da Docket
+- Repository: Trata as transações do banco de dados
 
-### Listagem
-- Quando encontrar retornar 200 com a lista de entidades
-- Quando não encontrar retornar 20 com lista vazia
+###Executando
 
-### Delete
-- Quando encontrar só retornar 200
-- Quando não encontrar retornar 404
+Caso queira executar por linha de comando basta executar os seguintes comandos dependendo do seu sistema.
 
-### Post
-- Quando conseguir criar com sucesso retornar 201
-- Quando não conseguir criar por erro do user retornar 400
+**Linux ou Mac**
+```
+./gradlew build
+cd ${PROJECT_ROOT_DIR}/build/libs/regestry-rest-api-0.1-SNAPSHOT.jar
+java -jar regestry-rest-api-0.1-SNAPSHOT.jar
+```
 
-### Put
-- Quando conseguir encontrar o ID e atualizar com sucesso retornar 200
-- Quando conseguir encontrar o ID e não atualizar retornar 400
-- Quando não encontrar ID retornar 404
+**Windows:**
+```
+gradlew.bat build
+cd ${PROJECT_ROOT_DIR}/build/libs/regestry-rest-api-0.1-SNAPSHOT.jar
+java -jar regestry-rest-api-0.1-SNAPSHOT.jar
+```
 
+###Rodando Testes
+**Linux ou Mac**
+```
+./gradlew test
+```
 
+**Windows:**
+```
+gradlew.bat test
+```
+
+###Postman
+
+Segue minha coleção de comandos do Postman:
+
+https://www.getpostman.com/collections/c96cb51b48521343dfed
