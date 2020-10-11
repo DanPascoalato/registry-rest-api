@@ -8,16 +8,17 @@ import br.com.docket.registry.repository.AddressRepository;
 import br.com.docket.registry.repository.CertificateRepository;
 import br.com.docket.registry.repository.RegistryOfficeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/registry")
+@Transactional
 public class RegistryOfficeController {
 
     private RegistryOfficeRepository officeRepo;
@@ -33,32 +34,33 @@ public class RegistryOfficeController {
         this.certRepo = certRepo;
     }
 
-
     @PostMapping
-    public RegistryOffice save(@RequestBody RegistryOffice registryOffice) {
-        registryOffice.getCertificates().forEach(cert -> certRepo.save(cert));
-        Address savedAddress = addressRepo.save(registryOffice.getAddress());
-        return officeRepo.save(registryOffice);
+    public ResponseEntity<RegistryOffice> save(@RequestBody RegistryOffice registryOffice) {
+        registryOffice.getCertificates().forEach(cert -> certRepo.saveAndFlush(cert));
+        Address savedAddress = addressRepo.saveAndFlush(registryOffice.getAddress());
+        RegistryOffice savedRegistryOffice = officeRepo.saveAndFlush(registryOffice);
+        return new ResponseEntity<>(savedRegistryOffice, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public RegistryOffice get(@PathVariable("id") Long id) {
-        Optional<RegistryOffice> office = officeRepo.findById(id);
-        return office.orElse(null);
+    public ResponseEntity<RegistryOffice> get(@PathVariable("id") Long id) {
+        Optional<RegistryOffice> foundRegistryOffice = officeRepo.findById(id);
+        return ResponseEntity.of(foundRegistryOffice);
     }
 
     @PutMapping("/{id}")
-    public RegistryOffice put(@RequestBody RegistryOffice newRegistryOffice, @PathVariable("id") Long id) {
-        Optional<RegistryOffice> optionalOffice = officeRepo.findById(id);
-        if(optionalOffice.isPresent()) {
-            RegistryOffice office = optionalOffice.orElse(null);
-            Address savedAddress = addressRepo.save(newRegistryOffice.getAddress());
-            newRegistryOffice.getCertificates().forEach(cert -> certRepo.save(cert));
-            office.updateWith(newRegistryOffice);
-            return officeRepo.save(office);
-        } else {
-            return null;
-        }
+    public ResponseEntity<RegistryOffice> put(@PathVariable("id") Long id,
+                                              @RequestBody RegistryOffice updatingOffice) {
+        Optional<RegistryOffice> foundRegistryOffice = officeRepo.findById(id);
+        Optional<RegistryOffice> updatedRegistryOffice = foundRegistryOffice.map(off -> {
+            Address address = addressRepo.save(off.getAddress().updateWith(updatingOffice.getAddress()));
+            certRepo.deleteAll(off.getCertificates());
+            List<Certificate> certificates = certRepo.saveAll(updatingOffice.getCertificates());
+            RegistryOffice office = new RegistryOffice(off.getId(), updatingOffice.getName(), address, certificates);
+            return officeRepo.saveAndFlush(office);
+        });
+
+        return ResponseEntity.of(updatedRegistryOffice);
     }
 
     @DeleteMapping("/{id}")
@@ -74,6 +76,4 @@ public class RegistryOfficeController {
     public List<RegistryOffice> list() {
         return (List<RegistryOffice>) officeRepo.findAll();
     }
-
-
 }
