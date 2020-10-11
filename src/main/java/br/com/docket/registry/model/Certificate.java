@@ -1,5 +1,6 @@
 package br.com.docket.registry.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
@@ -12,7 +13,7 @@ public class Certificate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "cert_gen_seq")
-    @JsonProperty
+    @JsonProperty("id")
     private Long id;
 
     @Column(name = "name")

@@ -19,13 +19,15 @@ dependencies {
     val junitVersion = "5.7.0"
     val assertJVersion = "3.17.2"
     val h2Version = "1.4.197"
-    val lombokVersion = "1.18.12"
+    val retrofitVersion = "2.9.0"
 
     implementation("org.springframework.boot:spring-boot-starter-web") {
         exclude(module = "spring-boot-starter-tomcat")
     }
     implementation("org.springframework.boot:spring-boot-starter-jetty")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-jackson:$retrofitVersion")
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
     testImplementation("org.junit.vintage:junit-vintage-engine:$junitVersion")
     testImplementation("org.assertj:assertj-core:$assertJVersion")
