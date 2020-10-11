@@ -9,24 +9,22 @@ class AddressTest {
 
     @Test
     public void whenStreetAddressIsBlankShouldThrowIllegalArgumentException() {
-        assertThatIllegalArgumentException().isThrownBy(()-> new Address("","237649", "São Paulo", "SP"));
+        assertThatIllegalArgumentException().isThrownBy(()-> new Address(1L,"", "","237649", "São Paulo", "SP"));
     }
 
     @Test
     public void whenPostalCodeIsBlankShouldThrowIllegalArgumentException() {
-        assertThatIllegalArgumentException().isThrownBy(()-> new Address("Av Paulista 1000","", "São Paulo", "SP"));
+        assertThatIllegalArgumentException().isThrownBy(()-> new Address(1L, "Av Paulista 1000","","", "São Paulo", "SP"));
     }
 
     @Test
     public void whenCityIsBlankShouldThrowIllegalArgumentException() {
-        assertThatIllegalArgumentException().isThrownBy(()-> new Address("Av Paulista 1000","237649", "", "SP"));
+        assertThatIllegalArgumentException().isThrownBy(()-> new Address(1L, "Av Paulista 1000", "", "237649", "", "SP"));
     }
 
     @Test
     public void whenStateIsBlankShouldThrowIllegalArgumentException() {
-        assertThatIllegalArgumentException().isThrownBy(()-> new Address("Av Paulista 1000","237649", "São Paulo", ""));
+        assertThatIllegalArgumentException().isThrownBy(()-> new Address(1L, "Av Paulista 1000", "", "237649", "São Paulo", ""));
     }
-
-    //TODO implement test if it works
 
 }

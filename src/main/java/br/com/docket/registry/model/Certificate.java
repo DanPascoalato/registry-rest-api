@@ -1,6 +1,5 @@
 package br.com.docket.registry.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
@@ -20,9 +19,7 @@ public class Certificate {
     @JsonProperty("name")
     private String name;
 
-    private Certificate() {
-
-    }
+    private Certificate() { }
 
     public Certificate(Long id, String name) {
         setId(id);
@@ -31,14 +28,14 @@ public class Certificate {
 
     private void setId(Long id) {
         if(id <= 0){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Certificate Id must be must greater than 0");
         }
         this.id = id;
     }
 
     private void setName(String name) {
         if(name.isBlank()){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Certificate Name cannot be null or empty");
         }
         this.name = name.trim();
     }
