@@ -1,16 +1,9 @@
 package br.com.docket.registry.model;
 
-import br.com.docket.registry.repository.CertificateRepository;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Generated;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Lazy;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -30,43 +23,41 @@ public class RegistryOffice {
     @JsonProperty("address")
     private Address address;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonProperty("certificates")
     private List<Certificate> certificates;
 
-    private RegistryOffice() {
+    private RegistryOffice() { }
 
-    }
-
-    public RegistryOffice(String name, Address address, List<Certificate> certificates) {
+    public RegistryOffice(Long id, String name, Address address, List<Certificate> certificates) {
+        setId(id);
         setName(name);
         setAddress(address);
-        this.certificates = new ArrayList<>();
+        setCertificates(certificates);
     }
 
-    public void updateWith(RegistryOffice registryOffice) {
-        setName(registryOffice.name);
-        Address newAddress = registryOffice.address;
-        setAddress(newAddress);
-        this.certificates = registryOffice.getCertificates();
+    private void setId(long id) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("Office ID must be greater than 0");
+        }
+        this.id = id;
     }
-
-
-//    public void addCertificate(Certificate certificate) {
-//        this.certificates.add(certificate);
-//    }
 
     private void setName(String name) {
         if(name.isBlank()){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Office Name cannot be null or empty");
         }
         this.name = name.trim();
     }
 
     private void setAddress(Address address) {
         if(address == null){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Office address cannot be null or empty");
         }
         this.address = address;
+    }
+
+    private void setCertificates(List<Certificate> certificates) {
+        this.certificates = certificates;
     }
 }
