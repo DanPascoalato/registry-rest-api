@@ -21,6 +21,4 @@ class RegistryTest {
         assertThatIllegalArgumentException().isThrownBy(()-> new RegistryOffice(1L, "Cartorio de notas", null, certs));
     }
 
-    //TODO implement test if it works
-
 }
